@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  DESSERT
+  DRINK
+  FOOD
+}
+
+enum PortionUnit {
+  mg
+  ml
+}
+
+model Item {
+  id          String      @id @default(uuid())
+  category    Category
+  createdAt   DateTime    @default(now())
+  description String      @db.VarChar(100)
+  imageUrl    String      @db.VarChar(100)
+  name        String      @db.VarChar(20)
+  portion     Int
+  portionUnit PortionUnit
+  price       Int
+  updatedAt   DateTime    @updatedAt
+
+  @@index([category])
+}
