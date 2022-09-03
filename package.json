@@ -1,14 +1,14 @@
 {
   "name": "items",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A CRUD for menu items",
   "main": "dist/src/main.js",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write '**/*.{json,ts}'",
     "prebuild": "rm -rf dist",
-    "migrate": "prisma db push",
-    "start": "npm run migrate && node dist/main",
+    "db:push": "prisma db push",
+    "start": "npm run db:push && node dist/main",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "test": "echo -e 'Where are my tests'"
@@ -22,7 +22,6 @@
   "dependencies": {
     "@fastify/static": "^6.5.0",
     "@nestjs/common": "^9.0.11",
-    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.11",
     "@nestjs/platform-fastify": "^9.0.11",
     "@nestjs/swagger": "^6.1.1",
