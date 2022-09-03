@@ -1,10 +1,10 @@
 .*
 
 !.dockerignore
-!.eslintrc
 !.gitignore
-!.prettierrc
+!.nvmrc
 !.prettierignore
+!.prettierrc
 
 dist/
-node_modules
+node_modules/

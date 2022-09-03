@@ -1,0 +1,23 @@
+upstream app {
+    server app:$APP_PORT;
+}
+
+upstream db {
+    server db:$DATABASE_PORT;
+}
+
+server {
+    listen $APP_PORT;
+
+    location / {
+        proxy_pass http://app;
+    }
+}
+
+server {
+    listen $DATABASE_PORT;
+
+    location / {
+        proxy_pass http://db;
+    }
+}
