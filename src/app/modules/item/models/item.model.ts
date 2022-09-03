@@ -1,27 +1,27 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 
-import type { Item as ItemModel } from '@prisma/client';
-
 import { Type } from 'class-transformer';
 import { IsEnum, IsInt, IsISO8601, IsPositive, IsString, IsUrl, IsUUID, Length, MinLength } from 'class-validator';
 
 export enum Category {
-  DESSERT = 'DESSERT',
-  DRINK = 'DRINK',
-  FOOD = 'FOOD',
+  DESSERT,
+  DRINK,
+  FOOD,
 }
 
 enum PortionUnit {
-  MG = 'mg',
-  ML = 'ml',
+  mg,
+  ml,
 }
 
 export class ItemCreateInput {
-  @ApiProperty()
+  @ApiProperty({
+    enum: Category,
+  })
   @IsString()
   @IsEnum(Category)
   @MinLength(1)
-  category: Category;
+  category: keyof typeof Category
 
   @ApiProperty()
   @IsString()
@@ -39,18 +39,24 @@ export class ItemCreateInput {
   @Length(1, 20)
   name: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    minimum: 1,
+  })
   @IsInt()
   @IsPositive()
   portion: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    enum: PortionUnit,
+  })
   @IsString()
   @IsEnum(PortionUnit)
   @MinLength(1)
-  portionUnit: PortionUnit;
+  portionUnit: keyof typeof PortionUnit;
 
-  @ApiProperty()
+  @ApiProperty({
+    minimum: 1,
+  })
   @IsInt()
   @IsPositive()
   price: number;
@@ -58,7 +64,7 @@ export class ItemCreateInput {
 
 export class ItemUpdateInput extends PartialType(ItemCreateInput) {}
 
-export class Item extends ItemCreateInput {
+class Item extends ItemCreateInput {
   @ApiProperty()
   @IsString()
   @IsUUID()
@@ -69,31 +75,40 @@ export class Item extends ItemCreateInput {
   @IsString()
   @IsISO8601()
   @MinLength(1)
-  createdAt: string;
+  createdAt: Date;
 
   @ApiProperty()
   @IsString()
   @IsISO8601()
   @MinLength(1)
-  updatedAt: string;
+  updatedAt: Date;
 }
 
 export class GetItemsQueryArgs {
+  @ApiProperty({
+    enum: Category,
+  })
   @IsEnum(Category)
   @IsString()
   @MinLength(1)
-  category?: Category;
+  category?: keyof typeof Category;
 
+  @ApiProperty({
+    minimum: 1,
+  })
   @Type(() => Number)
   @IsPositive()
   limit: number;
 
+  @ApiProperty({
+    minimum: 1,
+  })
   @Type(() => Number)
   @IsPositive()
   page: number;
 }
 
-export class PaginationOpts {
+class PaginationOpts {
   @ApiProperty()
   currentPage: number;
 
@@ -114,14 +129,21 @@ export class PaginationOpts {
 }
 
 export class PaginatedItems {
-  @ApiProperty()
+  @ApiProperty({
+    type: PaginationOpts,
+  })
   pagination: PaginationOpts;
 
-  @ApiProperty()
-  resources: ItemModel[];
+  @ApiProperty({
+    type: Item,
+    isArray: true,
+  })
+  resources: Array<Item>;
 }
 
 export class SingleItem {
-  @ApiProperty()
-  resource: ItemModel | null;
+  @ApiProperty({
+    type: Item
+  })
+  resource: Item | null;
 }
