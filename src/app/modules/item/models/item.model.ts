@@ -1,5 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 
 import type { Item as ItemModel } from '@prisma/client';
 
@@ -94,18 +93,35 @@ export class GetItemsQueryArgs {
   page: number;
 }
 
-export interface PaginatedItems {
-  pagination: {
-    currentPage: number;
-    from: number;
-    pageCount: number;
-    perPage: number;
-    to: number;
-    total: number;
-  };
+export class PaginationOpts {
+  @ApiProperty()
+  currentPage: number;
+
+  @ApiProperty()
+  from: number;
+
+  @ApiProperty()
+  pageCount: number;
+
+  @ApiProperty()
+  perPage: number;
+
+  @ApiProperty()
+  to: number;
+
+  @ApiProperty()
+  total: number;
+}
+
+export class PaginatedItems {
+  @ApiProperty()
+  pagination: PaginationOpts;
+
+  @ApiProperty()
   resources: ItemModel[];
 }
 
-export interface SingleItem {
+export class SingleItem {
+  @ApiProperty()
   resource: ItemModel | null;
 }

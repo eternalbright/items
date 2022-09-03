@@ -5,7 +5,6 @@ import { ItemService } from '../services/item.service';
 
 import {
   GetItemsQueryArgs,
-  Item,
   ItemCreateInput,
   ItemUpdateInput,
   PaginatedItems,
@@ -21,7 +20,7 @@ export class ItemController {
 
   @Post()
   @ApiCreatedResponse({
-    type: ItemCreateInput,
+    type: SingleItem,
   })
   async create(@Body() itemCreateInput: ItemCreateInput): Promise<SingleItem> {
     this.logger.debug(itemCreateInput);
@@ -37,8 +36,7 @@ export class ItemController {
 
   @Get()
   @ApiOkResponse({
-    type: Item,
-    isArray: true,
+    type: PaginatedItems,
   })
   async getAll(@Query() queryArgs: GetItemsQueryArgs): Promise<PaginatedItems> {
     this.logger.debug(queryArgs);
@@ -49,7 +47,7 @@ export class ItemController {
 
   @Get(':itemId')
   @ApiOkResponse({
-    type: Item,
+    type: SingleItem,
   })
   async getById(@Param('itemId') itemId: string): Promise<SingleItem> {
     this.logger.log('Request to get an item by ID', itemId);
@@ -59,7 +57,7 @@ export class ItemController {
 
   @Patch(':itemId')
   @ApiOkResponse({
-    type: Item,
+    type: SingleItem,
   })
   async update(@Body() itemUpdateInput: ItemUpdateInput, @Param('itemId') itemId: string): Promise<SingleItem> {
     this.logger.debug(itemUpdateInput);
@@ -74,9 +72,7 @@ export class ItemController {
   }
 
   @Delete(':itemId')
-  @ApiOkResponse({
-    type: Item,
-  })
+  @ApiOkResponse()
   async delete(@Param('itemId') itemId: string): Promise<void> {
     this.logger.log('Request to delete an item', itemId);
 
