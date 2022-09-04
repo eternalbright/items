@@ -21,7 +21,7 @@ export class ItemCreateInput {
   @IsString()
   @IsEnum(Category)
   @MinLength(1)
-  category: keyof typeof Category
+  category: keyof typeof Category;
 
   @ApiProperty()
   @IsString()
@@ -143,7 +143,7 @@ export class PaginatedItems {
 
 export class SingleItem {
   @ApiProperty({
-    type: Item
+    type: Item,
   })
   resource: Item | null;
 }

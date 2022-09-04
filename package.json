@@ -5,12 +5,15 @@
   "main": "dist/src/main.js",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write '**/*.{json,ts}'",
-    "prebuild": "rm -rf dist",
     "db:push": "prisma db push",
+    "format": "prettier --write '**/*.{json,ts}'",
+    "lint": "eslint . --ext .ts",
+    "prebuild": "rm -rf dist",
+    "prepare": "husky install",
     "start": "npm run db:push && node dist/main",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
+    "start:docker": "docker compose up",
     "test": "echo -e 'Where are my tests'"
   },
   "repository": {
@@ -34,6 +37,13 @@
     "@nestjs/cli": "^9.1.1",
     "@tsconfig/node18-strictest": "^1.0.0",
     "@types/node": "^18.7.14",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
     "prettier": "^2.7.1"
   }
 }

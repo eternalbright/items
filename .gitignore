@@ -1,7 +1,9 @@
 .*
 
 !.dockerignore
+!.eslintrc
 !.gitignore
+!.husky
 !.nvmrc
 !.prettierignore
 !.prettierrc
