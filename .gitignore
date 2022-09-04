@@ -1,10 +1,13 @@
 .*
 
 !.dockerignore
+!.eslintrc
 !.gitignore
 !.nvmrc
 !.prettierignore
 !.prettierrc
+
+!.husky/
 
 dist/
 node_modules/

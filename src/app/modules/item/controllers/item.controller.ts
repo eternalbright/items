@@ -3,13 +3,7 @@ import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { ItemService } from '../services/item.service';
 
-import {
-  GetItemsQueryArgs,
-  ItemCreateInput,
-  ItemUpdateInput,
-  PaginatedItems,
-  SingleItem,
-} from '../models/item.model';
+import { GetItemsQueryArgs, ItemCreateInput, ItemUpdateInput, PaginatedItems, SingleItem } from '../models/item.model';
 
 @Controller('items')
 @ApiTags('items')
