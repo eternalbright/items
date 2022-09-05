@@ -9,6 +9,8 @@ upstream db {
 server {
     listen $APP_PORT;
 
+    add_header Access-Control-Allow-Origin "localhost";
+
     location / {
         proxy_pass http://app;
     }
