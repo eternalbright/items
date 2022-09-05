@@ -4,15 +4,18 @@ WORKDIR /build
 
 RUN apk add openssl
 
-COPY package*.json .
+COPY package.json .
+COPY package-lock.json .
 COPY prisma prisma
 
 RUN npm ci
 
 COPY src src
-COPY tsconfig*.json .
+COPY tsconfig.json .
+COPY tsconfig.build.json .
 
 RUN npm run build
+
 RUN npm prune --omit dev
 
 

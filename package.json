@@ -1,6 +1,6 @@
 {
   "name": "items",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A CRUD for menu items",
   "main": "dist/src/main.js",
   "scripts": {
