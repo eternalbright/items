@@ -1,0 +1,44 @@
+{
+  "name": "nestjs-service-template",
+  "version": "1.0.0",
+  "description": "A sample Nest.js service",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "author": "Oleksandr Mykhailovskyi <eternalbright@pm.me>",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^9.4.0",
+    "@nestjs/core": "^9.4.0"
+  },
+  "devDependencies": {
+    "@eternalbright/eslint-config": "github:eternalbright/eslint-config#semver:^1.0.0",
+    "@eternalbright/dotfiles": "github:eternalbright/.dotfiles.node#semver:^1.0.0",
+    "@nestjs/cli": "^9.4.1",
+    "@nestjs/testing": "^9.4.0",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^18.15.3",
+    "eslint": "^8.38.0",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "ts-node": "^10.9.1"
+  },
+  "scripts": {
+    "build": "nest build",
+    "lint": "eslint src",
+    "lint:fix": "npm run lint -- --fix",
+    "prebuild": "rm -rf dist/",
+    "prepare": "husky install",
+    "start": "node dist/main.js",
+    "start:debug": "nest start --debug --watch",
+    "start:dev": "nest start --watch",
+    "test": "jest -c test/jest.config.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:eternalbright/nestjs-service-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eternalbright/nestjs-service-template/issues"
+  },
+  "homepage": "https://github.com/eternalbright/nestjs-service-template#readme"
+}

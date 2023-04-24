@@ -1,0 +1,11 @@
+.*
+
+!.eslintrc
+!.gitignore
+!.gitmodules
+!.nvmrc
+
+!.husky/
+
+dist/
+node_modules/

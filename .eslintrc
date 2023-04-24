@@ -1,0 +1,6 @@
+{
+  "extends": "@eternalbright/eslint-config",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "extends": "@eternalbright/dotfiles/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+  },
+}
