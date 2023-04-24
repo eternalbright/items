@@ -1,0 +1,13 @@
+upstream app {
+    server app:$APP_PORT;
+}
+
+server {
+    listen $APP_PORT;
+
+    location / {
+        add_header Access-Control-Allow-Origin "localhost" always;
+
+        proxy_pass http://app;
+    }
+}

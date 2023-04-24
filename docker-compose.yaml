@@ -1,0 +1,57 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ci/Dockerfile.nest
+    container_name: ${APP_NAME}
+    restart: always
+    environment:
+      APP_PORT: ${APP_PORT}
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: production
+    depends_on:
+      - db
+    expose:
+      - ${APP_PORT}
+    networks:
+      - default
+  db:
+    image: postgres:14-alpine
+    container_name: ${DATABASE_HOST}
+    restart: always
+    environment:
+      - POSTGRES_HOST=${DATABASE_HOST}
+      - POSTGRES_PORT=${DATABASE_PORT}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    expose:
+      - ${DATABASE_PORT}
+    ports:
+      - ${DATABASE_PORT}:${DATABASE_PORT}
+    networks:
+      - default
+  nginx:
+    image: nginx:1-alpine
+    container_name: nginx
+    restart: always
+    environment:
+      - APP_PORT=${APP_PORT}
+      - DATABASE_PORT=${DATABASE_PORT}
+    volumes:
+      - ${CONFIG_DIR}/nginx/proxy.conf.template:/etc/nginx/templates/proxy.conf.template
+    depends_on:
+      - app
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    networks:
+      - default
+
+networks:
+  default:
+
+volumes:
+  db:
